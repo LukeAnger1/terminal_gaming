@@ -36,7 +36,6 @@ void enableRawMode() {
 int main() {
   enableRawMode();
 
-  char c;
   while (1) {
     char c = '\0';
     if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN) die("read");
