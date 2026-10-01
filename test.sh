@@ -4,7 +4,9 @@
 rm main
 
 # Compile the code with the debug flag
-clang++ src/main.cpp -o main -std=c++26 -Wall -Wextra -O2 -pthread -D DEBUG=1
+# clang++ src/main.cpp -o main -std=c++26 -Wall -Wextra -O2 -pthread -D DEBUG=1
+# NOTE: Temporary switch to different compiler because my clange++ is messed up
+g++ src/main.cpp -o main -std=c++20 -Wall -Wextra -O2 -pthread -D DEBUG=1
 
 # Run the code
 ./main
