@@ -3,19 +3,16 @@
 #include "camera.cpp"
 #include "screen.cpp"
 #include "obj/triangle.cpp"
-
-// TODO: Remove this
-//   This is a test function to develop the render
-char test_function(int x, int y) {
-  return x<3? 'a':'b';
-}
+#include "obj/object.cpp"
 
 class render_wrapper {
 public:
   render_wrapper() {
 
-    // TODO: Remove this test triangle
-    triangles.push_back(Triangle(Point(10, 10, 0), Point(2, 1, 0), Point(100, 2, 0)));
+    // TODO: Clean this up some
+    Triangle triangle{Point(10, 10, 0), Point(2, 1, 0), Point(100, 2, 0)};
+    Object object{{triangle}};
+    objects.push_back(object);
   }
 
   void add_object() {
@@ -28,11 +25,11 @@ public:
 
   void render() {
     // Update the frame buffer
-    screen.update_screen([&tris = triangles](int x, int y) {
+    screen.update_screen([&objs = objects](int x, int y) {
       // Iterate through the triangles
-      for (const auto& triangle : tris) {
+      for (const Object& obj : objs) {
         // Check if the point is in the triangle
-        if (triangle.contains(x, y)) {
+        if (obj.contains(x, y)) {
 
           // Short circuit to return 'h'
           return 'O';
@@ -47,7 +44,7 @@ public:
   }
 
 private:
-  std::vector<Triangle> triangles; // TODO: Update this for generic objs?
+  std::vector<Object> objects;
   Screen screen;
   Camera camera;
 };
