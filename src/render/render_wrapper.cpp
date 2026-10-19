@@ -12,7 +12,11 @@ char test_function(int x, int y) {
 
 class render_wrapper {
 public:
-  render_wrapper() : screen(), camera() {}
+  render_wrapper() {
+
+    // TODO: Remove this test triangle
+    triangles.push_back(Triangle(Point(10, 10, 0), Point(2, 1, 0), Point(100, 2, 0)));
+  }
 
   void add_object() {
     // TODO: Implement this or decide if we need this
@@ -28,12 +32,14 @@ public:
       // Iterate through the triangles
       for (const auto& triangle : tris) {
         // Check if the point is in the triangle
+        if (triangle.contains(x, y)) {
 
-        // Short circuit to return 'h'
+          // Short circuit to return 'h'
+          return 'O';
+        }
       }
 
-      // Return the ' ' blank
-      return '1';
+      return ' ';
     });
 
     // Print the frame buffer
