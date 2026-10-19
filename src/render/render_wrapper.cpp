@@ -1,3 +1,5 @@
+#include <vector>
+
 #include "camera.cpp"
 #include "screen.cpp"
 #include "obj/triangle.cpp"
@@ -22,13 +24,24 @@ public:
 
   void render() {
     // Update the frame buffer
-    screen.update_screen(test_function);
+    screen.update_screen([&tris = triangles](int x, int y) {
+      // Iterate through the triangles
+      for (const auto& triangle : tris) {
+        // Check if the point is in the triangle
+
+        // Short circuit to return 'h'
+      }
+
+      // Return the ' ' blank
+      return '1';
+    });
 
     // Print the frame buffer
     screen.print_screen();
   }
 
 private:
+  std::vector<Triangle> triangles; // TODO: Update this for generic objs?
   Screen screen;
   Camera camera;
 };
