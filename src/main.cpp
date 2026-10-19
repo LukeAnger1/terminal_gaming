@@ -10,6 +10,7 @@
 #include <unistd.h>
 
 #include "render/screen.cpp"
+#include "render/render_wrapper.cpp"
 #include "utils/program_control.cpp"
 
 int main() {
@@ -23,11 +24,15 @@ int main() {
 #endif
 
   // Testing rendering a screen
-  Screen screen;
-  screen.set_char(0, 0, 'a');
-  screen.set_char(1, 0, 'b');
-  screen.set_char(2, 0, 'c');
-  screen.print_screen();
+  // Screen screen;
+  // screen.set_char(0, 0, 'a');
+  // screen.set_char(1, 0, 'b');
+  // screen.set_char(2, 0, 'c');
+  // screen.print_screen();
+
+  // Render wrapper for rendering graphics
+  render_wrapper render_wrapper;
+  render_wrapper.render();
 
   while (1) {
     char c = '\0';
