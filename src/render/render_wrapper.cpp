@@ -42,8 +42,11 @@ public:
     // TODO: Implement this or decide if we need this
   }
 
-  void move_camera() {
-    // TODO: Implement this later
+  void move_camera(int dx, int dy, int dz, angle d_roll, angle d_pitch) {
+    // TODO: Add in z movement
+    camera.translate_camera_2d(dx, dy);
+
+    camera.rotate_camera(d_roll, d_pitch);
   }
 
   void render() {

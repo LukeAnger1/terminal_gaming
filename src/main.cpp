@@ -32,18 +32,44 @@ int main() {
 
   // Render wrapper for rendering graphics
   render_wrapper render_wrapper;
-  render_wrapper.render();
 
   while (1) {
     char c = '\0';
     if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN)
       endProgram("read");
     read(STDIN_FILENO, &c, 1);
-    if (iscntrl(c)) {
-      // printf("%d\r\n", c);
-    } else {
-      // printf("%d ('%c')\r\n", c, c);
+    // printf("%d\r\n", c);
+
+    // Move the camera translare around with wasd
+    if (c == 'a') {
+      render_wrapper.move_camera(-1, 0, 0, 0, 0);
     }
+    if (c == 'd') {
+      render_wrapper.move_camera(1, 0, 0, 0, 0);
+    }
+    if (c == 'w') {
+      render_wrapper.move_camera(0, -1, 0, 0, 0);
+    }
+    if (c == 's') {
+      render_wrapper.move_camera(0, 1, 0, 0, 0);
+    }
+
+    // Move the camera rotate with ijkl
+    if (c == 'i') {
+      render_wrapper.move_camera(0, 0, 0, -.01, 0);
+    }
+    if (c == 'j') {
+      render_wrapper.move_camera(0, 0, 0, .01, 0);
+    }
+    if (c == 'k') {
+      render_wrapper.move_camera(0, 0, 0, 0, -.01);
+    }
+    if (c == 'l') {
+      render_wrapper.move_camera(0, 0, 0, 0, .01);
+    }
+
+    render_wrapper.render();
+
     if (c == 'q')
       break;
   }
