@@ -23,13 +23,6 @@ int main() {
   // std::cout << "Not in debug mode\n";
 #endif
 
-  // Testing rendering a screen
-  // Screen screen;
-  // screen.set_char(0, 0, 'a');
-  // screen.set_char(1, 0, 'b');
-  // screen.set_char(2, 0, 'c');
-  // screen.print_screen();
-
   // Render wrapper for rendering graphics
   render_wrapper render_wrapper;
 
@@ -38,7 +31,11 @@ int main() {
     if (read(STDIN_FILENO, &c, 1) == -1 && errno != EAGAIN)
       endProgram("read");
     read(STDIN_FILENO, &c, 1);
-    // printf("%d\r\n", c);
+
+    // TODO: Add in macros for the change in camera to easily change
+    // TODO: Change the x/y/z into a custom type that is a float
+    // TODO: Clear the screen between calls
+    // TODO: Add in logic to get the proper screen size for the terminal
 
     // Move the camera translare around with wasd
     if (c == 'a') {
