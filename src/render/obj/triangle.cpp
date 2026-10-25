@@ -4,7 +4,7 @@
 
 class Triangle {
 public:
-  Triangle(Point a, Point b, Point c) : a(a), b(b), c(c) {
+  constexpr Triangle(Point a, Point b, Point c) : a(a), b(b), c(c) {
 
 #if DEBUG == 1
 

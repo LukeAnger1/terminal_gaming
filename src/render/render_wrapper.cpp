@@ -5,13 +5,36 @@
 #include "obj/triangle.cpp"
 #include "obj/object.cpp"
 
+// Square parameters
+//   TODO: Remove this later
+#define SQUARE_WIDTH 10
+#define SQUARE_OFFSET 10
+
+static constexpr Point bottom_1{SQUARE_OFFSET, SQUARE_OFFSET, SQUARE_OFFSET};
+static constexpr Point bottom_2{SQUARE_OFFSET, SQUARE_OFFSET, SQUARE_OFFSET+SQUARE_WIDTH};
+static constexpr Point bottom_3{SQUARE_OFFSET, SQUARE_OFFSET+SQUARE_WIDTH, SQUARE_OFFSET};
+static constexpr Point bottom_4{SQUARE_OFFSET, SQUARE_OFFSET+SQUARE_WIDTH, SQUARE_OFFSET+SQUARE_WIDTH};
+static constexpr Point top_1{SQUARE_OFFSET+SQUARE_WIDTH, SQUARE_OFFSET, SQUARE_OFFSET};
+static constexpr Point top_2{SQUARE_OFFSET+SQUARE_WIDTH, SQUARE_OFFSET, SQUARE_OFFSET+SQUARE_WIDTH};
+static constexpr Point top_3{SQUARE_OFFSET+SQUARE_WIDTH, SQUARE_OFFSET+SQUARE_WIDTH, SQUARE_OFFSET};
+static constexpr Point top_4{SQUARE_OFFSET+SQUARE_WIDTH, SQUARE_OFFSET+SQUARE_WIDTH, SQUARE_OFFSET+SQUARE_WIDTH};
+
+static constexpr Triangle triangle_top_1{top_1, top_2, top_3};
+static constexpr Triangle triangle_top_2{top_1, top_4, top_3};
+static constexpr Triangle triangle_front_1{bottom_1, top_2, top_1};
+static constexpr Triangle triangle_front_2{bottom_1, top_2, bottom_2};
+static constexpr Triangle triangle_side_1{bottom_2, top_3, top_2};
+static constexpr Triangle triangle_side_2{bottom_2, top_3, bottom_3};
+
 class render_wrapper {
 public:
   render_wrapper() {
 
-    // TODO: Clean this up some
-    Triangle triangle{Point(10, 10, 0), Point(2, 1, 0), Point(100, 2, 0)};
-    Object object{{triangle}};
+    Object object{{
+      // triangle_top_1, triangle_top_2,
+      // triangle_front_1, triangle_front_2,
+      triangle_side_1, triangle_side_2
+    }};
     objects.push_back(object);
   }
 

@@ -1,6 +1,6 @@
 class Point {
 public:
-  Point(int x, int y, int z) : x(x), y(y), z(z) {}
+  constexpr Point(int x, int y, int z) : x(x), y(y), z(z) {}
 
   // bool operator==(const Point &other) {
     // NOTE: I dont think I do this becasue the compiler auto generates checks
