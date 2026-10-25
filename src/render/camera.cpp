@@ -1,5 +1,9 @@
 #include "obj/triangle.cpp"
 
+#pragma once
+
+const double PI = 3.14159265358979323846;
+
 typedef float angle;
 
 class Camera {
@@ -9,7 +13,7 @@ public:
 
   Camera(int x, int y, int z) : x(x), y(y), z(z), roll(0), pitch(0) {}
 
-  Camera() : x(0), y(0), z(0), roll(0), pitch(0) {}
+  Camera() : x(0), y(0), z(0), roll(-PI/2), pitch(PI/2) {}
 
   void translate_camera_2d(int dx, int dy) {
     x += dx;
@@ -19,6 +23,26 @@ public:
   void rotate_camera(const float& d_roll, const float& d_pitch) {
     roll += d_roll;
     pitch += d_pitch;
+  }
+
+  int get_x() {
+    return x;
+  }
+
+  int get_y() {
+    return y;
+  }
+
+  int get_z() {
+    return z;
+  }
+
+  angle get_roll() {
+    return roll;
+  }
+
+  angle get_pitch() {
+    return pitch;
   }
 
 private:

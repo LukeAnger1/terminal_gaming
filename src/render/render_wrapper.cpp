@@ -52,11 +52,11 @@ public:
     //   Make sure to drop the ones that are behind the camera
 
     // Update the frame buffer
-    screen.update_screen([&objs = objects](int x, int y) {
+    screen.update_screen([&objs = objects, &camera = camera](int x, int y) {
       // Iterate through the triangles
       for (const Object& obj : objs) {
         // Check if the point is in the triangle
-        if (obj.contains(x, y)) {
+        if (obj.contains(camera.get_x(), camera.get_y(), camera.get_z(), camera.get_roll(), camera.get_pitch(), x, y)) {
 
           // Short circuit to return 'h'
           return 'O';

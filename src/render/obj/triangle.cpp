@@ -1,6 +1,12 @@
-#include "point.cpp"
+#include <cmath>
 
 #pragma once
+
+#include "point.cpp"
+#include "triangle.cpp"
+
+// TODO: Change this to use the angle from camera
+typedef float angle;
 
 // This macro for how close the detection has to be
 //   Adding this in because when the triangle is viewed to be a line,
@@ -25,6 +31,25 @@ public:
     bool all_negative = side_ab <= -EPS_EDGE_DETECTION && side_bc <= -EPS_EDGE_DETECTION && side_ca <= -EPS_EDGE_DETECTION;
 
     return all_positive || all_negative;
+  }
+
+  bool contains(int camera_x, int camera_y, int camera_z, angle camera_roll, angle camera_pitch, int x, int y) const {
+    // Translate the points based on the camera
+    int dx = x-camera_x;
+    int dy = y-camera_y;
+    int dz = -camera_z;
+
+    // Rotate the points based on the camera
+    //   Undo pitch (about the y axis)
+    int x1 =  cos(camera_pitch)*dx + sin(camera_pitch)*dz;
+    int y1 = dy;
+    int z1 = -sin(camera_pitch)*dx + cos(camera_pitch)*dz;
+    //   Undo roll (about the x axis)
+    int depth = x1;
+    int right = cos(camera_roll)*y1 + sin(camera_roll)*z1;
+    int up = -sin(camera_roll)*y1 + cos(camera_roll)*z1;
+
+    return contains(right, up);
   }
 
 private:
