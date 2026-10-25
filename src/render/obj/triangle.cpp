@@ -2,6 +2,11 @@
 
 #pragma once
 
+// This macro for how close the detection has to be
+//   Adding this in because when the triangle is viewed to be a line,
+//     it glitches into a line
+#define EPS_EDGE_DETECTION .25
+
 class Triangle {
 public:
   constexpr Triangle(Point a, Point b, Point c) : a(a), b(b), c(c) {
@@ -16,8 +21,8 @@ public:
     int side_bc = edge(b, c, x, y);
     int side_ca = edge(c, a, x, y);
 
-    bool all_positive = side_ab >= 0 && side_bc >= 0 && side_ca >= 0;
-    bool all_negative = side_ab <= 0 && side_bc <= 0 && side_ca <= 0;
+    bool all_positive = side_ab >= EPS_EDGE_DETECTION && side_bc >= EPS_EDGE_DETECTION && side_ca >= EPS_EDGE_DETECTION;
+    bool all_negative = side_ab <= -EPS_EDGE_DETECTION && side_bc <= -EPS_EDGE_DETECTION && side_ca <= -EPS_EDGE_DETECTION;
 
     return all_positive || all_negative;
   }

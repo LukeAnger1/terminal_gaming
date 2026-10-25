@@ -31,8 +31,8 @@ public:
   render_wrapper() {
 
     Object object{{
-      // triangle_top_1, triangle_top_2,
-      // triangle_front_1, triangle_front_2,
+      triangle_top_1, triangle_top_2,
+      triangle_front_1, triangle_front_2,
       triangle_side_1, triangle_side_2
     }};
     objects.push_back(object);
@@ -47,6 +47,10 @@ public:
   }
 
   void render() {
+    // TODO: Add in logic to sort triangles based on distance
+    //   Make sure the closest ones appear closer
+    //   Make sure to drop the ones that are behind the camera
+
     // Update the frame buffer
     screen.update_screen([&objs = objects](int x, int y) {
       // Iterate through the triangles
