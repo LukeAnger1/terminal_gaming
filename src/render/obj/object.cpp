@@ -5,7 +5,15 @@
 class Object {
 public:
   // TODO: change this constructor to either copy or something else
-  Object(std::vector<Triangle> triangles) { this->triangles = triangles; }
+  Object(std::vector<Triangle> triangles) {
+    this->triangles = triangles;
+    this->render_char = 'O';
+  }
+
+  Object(std::vector<Triangle> triangles, char render_char) {
+    this->triangles = triangles;
+    this->render_char = render_char;
+  }
 
   bool contains(int x, int y) const {
     // Cycle through each triangle,
@@ -33,6 +41,9 @@ public:
     return false;
   }
 
+  char get_render_char() const { return this->render_char; }
+
 private:
   std::vector<Triangle> triangles;
+  char render_char;
 };

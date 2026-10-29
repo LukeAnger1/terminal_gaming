@@ -39,7 +39,8 @@ public:
   render_wrapper() {
 
     Object object{{triangle_top_1, triangle_top_2, triangle_front_1,
-                   triangle_front_2, triangle_side_1, triangle_side_2}};
+                   triangle_front_2, triangle_side_1, triangle_side_2},
+                  'X'};
     objects.push_back(object);
   }
 
@@ -68,7 +69,9 @@ public:
                          camera.get_roll(), camera.get_pitch(), x, y)) {
 
           // Short circuit to return 'h'
-          return 'O';
+          // TODO: Sort the objects
+          //   There is currently no sorting, we need to add in sorting
+          return obj.get_render_char();
         }
       }
 
