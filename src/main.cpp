@@ -55,10 +55,10 @@ int main() {
     if (c == 'i') {
       render_wrapper.move_camera(0, 0, 0, -.01, 0);
     }
-    if (c == 'j') {
+    if (c == 'k') {
       render_wrapper.move_camera(0, 0, 0, .01, 0);
     }
-    if (c == 'k') {
+    if (c == 'j') {
       render_wrapper.move_camera(0, 0, 0, 0, -.01);
     }
     if (c == 'l') {
