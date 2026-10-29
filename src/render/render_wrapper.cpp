@@ -34,6 +34,36 @@ static constexpr Triangle triangle_front_2{bottom_1, top_2, bottom_2};
 static constexpr Triangle triangle_side_1{bottom_2, top_3, top_2};
 static constexpr Triangle triangle_side_2{bottom_2, top_3, bottom_3};
 
+#define SQUARE_WIDTH_2 10
+#define SQUARE_OFFSET_2 20
+
+static constexpr Point bottom2_1{SQUARE_OFFSET_2, SQUARE_OFFSET_2,
+                                 SQUARE_OFFSET_2};
+static constexpr Point bottom2_2{SQUARE_OFFSET_2, SQUARE_OFFSET_2,
+                                 SQUARE_OFFSET_2 + SQUARE_WIDTH_2};
+static constexpr Point bottom2_3{
+    SQUARE_OFFSET_2, SQUARE_OFFSET_2 + SQUARE_WIDTH_2, SQUARE_OFFSET_2};
+static constexpr Point bottom2_4{SQUARE_OFFSET_2,
+                                 SQUARE_OFFSET_2 + SQUARE_WIDTH_2,
+                                 SQUARE_OFFSET_2 + SQUARE_WIDTH_2};
+static constexpr Point top2_1{SQUARE_OFFSET_2 + SQUARE_WIDTH_2, SQUARE_OFFSET_2,
+                              SQUARE_OFFSET_2};
+static constexpr Point top2_2{SQUARE_OFFSET_2 + SQUARE_WIDTH_2, SQUARE_OFFSET_2,
+                              SQUARE_OFFSET_2 + SQUARE_WIDTH_2};
+static constexpr Point top2_3{SQUARE_OFFSET_2 + SQUARE_WIDTH_2,
+                              SQUARE_OFFSET_2 + SQUARE_WIDTH_2,
+                              SQUARE_OFFSET_2};
+static constexpr Point top2_4{SQUARE_OFFSET_2 + SQUARE_WIDTH_2,
+                              SQUARE_OFFSET_2 + SQUARE_WIDTH_2,
+                              SQUARE_OFFSET_2 + SQUARE_WIDTH_2};
+
+static constexpr Triangle triangle_top2_1{top2_1, top2_2, top2_3};
+static constexpr Triangle triangle_top2_2{top2_1, top2_4, top2_3};
+static constexpr Triangle triangle_front2_1{bottom2_1, top2_2, top2_1};
+static constexpr Triangle triangle_front2_2{bottom2_1, top2_2, bottom2_2};
+static constexpr Triangle triangle_side2_1{bottom2_2, top2_3, top2_2};
+static constexpr Triangle triangle_side2_2{bottom2_2, top2_3, bottom2_3};
+
 class render_wrapper {
 public:
   render_wrapper() {
@@ -41,7 +71,13 @@ public:
     Object object{{triangle_top_1, triangle_top_2, triangle_front_1,
                    triangle_front_2, triangle_side_1, triangle_side_2},
                   'X'};
+
+    Object object2{{triangle_top2_1, triangle_top2_2, triangle_front2_1,
+                    triangle_front2_2, triangle_side2_1, triangle_side2_2},
+                   'O'};
+
     objects.push_back(object);
+    objects.push_back(object2);
   }
 
   void add_object() {
