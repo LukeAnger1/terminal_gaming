@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <vector>
 
 #include "camera.cpp"
@@ -34,8 +35,8 @@ static constexpr Triangle triangle_front_2{bottom_1, top_2, bottom_2};
 static constexpr Triangle triangle_side_1{bottom_2, top_3, top_2};
 static constexpr Triangle triangle_side_2{bottom_2, top_3, bottom_3};
 
-#define SQUARE_WIDTH_2 10
-#define SQUARE_OFFSET_2 20
+#define SQUARE_WIDTH_2 20
+#define SQUARE_OFFSET_2 10
 
 static constexpr Point bottom2_1{SQUARE_OFFSET_2, SQUARE_OFFSET_2,
                                  SQUARE_OFFSET_2};
@@ -70,10 +71,12 @@ public:
 
     Object object{{triangle_top_1, triangle_top_2, triangle_front_1,
                    triangle_front_2, triangle_side_1, triangle_side_2},
+                  this->camera,
                   'X'};
 
     Object object2{{triangle_top2_1, triangle_top2_2, triangle_front2_1,
                     triangle_front2_2, triangle_side2_1, triangle_side2_2},
+                   this->camera,
                    'O'};
 
     objects.push_back(object);
@@ -92,9 +95,10 @@ public:
   }
 
   void render() {
-    // TODO: Add in logic to sort triangles based on distance
-    //   Make sure the closest ones appear closer
+    // TODO:
     //   Make sure to drop the ones that are behind the camera
+
+    std::sort(objects.begin(), objects.end());
 
     // Update the frame buffer
     screen.update_screen([&objs = objects, &camera = camera](int x, int y) {
@@ -105,8 +109,6 @@ public:
                          camera.get_roll(), camera.get_pitch(), x, y)) {
 
           // Short circuit to return 'h'
-          // TODO: Sort the objects
-          //   There is currently no sorting, we need to add in sorting
           return obj.get_render_char();
         }
       }

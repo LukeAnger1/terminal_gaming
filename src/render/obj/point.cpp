@@ -1,5 +1,13 @@
+#pragma once
+
+#include <limits>
+
 class Point {
 public:
+  constexpr Point()
+      : x(std::numeric_limits<int>::min()), y(std::numeric_limits<int>::min()),
+        z(std::numeric_limits<int>::min()) {}
+
   constexpr Point(int x, int y, int z) : x(x), y(y), z(z) {}
 
   // bool operator==(const Point &other) {

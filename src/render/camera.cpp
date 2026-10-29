@@ -25,11 +25,12 @@ public:
     pitch += d_pitch;
   }
 
-  int get_x() { return x; }
+  // TODO: Add in Point logic
+  int get_x() const { return x; }
 
-  int get_y() { return y; }
+  int get_y() const { return y; }
 
-  int get_z() { return z; }
+  int get_z() const { return z; }
 
   angle get_roll() { return roll; }
 

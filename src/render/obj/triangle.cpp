@@ -57,6 +57,14 @@ public:
     return contains(right, up);
   }
 
+  Point get_center() const {
+    int x = (a.get_x() + b.get_x() + c.get_x()) / 3;
+    int y = (a.get_y() + b.get_y() + c.get_y()) / 3;
+    int z = (a.get_z() + b.get_z() + c.get_z()) / 3;
+
+    return Point{x, y, z};
+  }
+
 private:
   // sign says what side of the line, 0 means on the line
   static int edge(const Point &from, const Point &to, int x, int y) {
