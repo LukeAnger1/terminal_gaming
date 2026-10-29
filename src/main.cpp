@@ -9,8 +9,8 @@
 #include <termios.h>
 #include <unistd.h>
 
-#include "render/screen.cpp"
 #include "render/render_wrapper.cpp"
+#include "render/screen.cpp"
 #include "utils/program_control.cpp"
 
 int main() {

@@ -27,27 +27,32 @@ public:
     int side_bc = edge(b, c, x, y);
     int side_ca = edge(c, a, x, y);
 
-    bool all_positive = side_ab >= EPS_EDGE_DETECTION && side_bc >= EPS_EDGE_DETECTION && side_ca >= EPS_EDGE_DETECTION;
-    bool all_negative = side_ab <= -EPS_EDGE_DETECTION && side_bc <= -EPS_EDGE_DETECTION && side_ca <= -EPS_EDGE_DETECTION;
+    bool all_positive = side_ab >= EPS_EDGE_DETECTION &&
+                        side_bc >= EPS_EDGE_DETECTION &&
+                        side_ca >= EPS_EDGE_DETECTION;
+    bool all_negative = side_ab <= -EPS_EDGE_DETECTION &&
+                        side_bc <= -EPS_EDGE_DETECTION &&
+                        side_ca <= -EPS_EDGE_DETECTION;
 
     return all_positive || all_negative;
   }
 
-  bool contains(int camera_x, int camera_y, int camera_z, angle camera_roll, angle camera_pitch, int x, int y) const {
+  bool contains(int camera_x, int camera_y, int camera_z, angle camera_roll,
+                angle camera_pitch, int x, int y) const {
     // Translate the points based on the camera
-    int dx = x-camera_x;
-    int dy = y-camera_y;
+    int dx = x - camera_x;
+    int dy = y - camera_y;
     int dz = -camera_z;
 
     // Rotate the points based on the camera
     //   Undo pitch (about the y axis)
-    int x1 =  cos(camera_pitch)*dx + sin(camera_pitch)*dz;
+    int x1 = cos(camera_pitch) * dx + sin(camera_pitch) * dz;
     int y1 = dy;
-    int z1 = -sin(camera_pitch)*dx + cos(camera_pitch)*dz;
+    int z1 = -sin(camera_pitch) * dx + cos(camera_pitch) * dz;
     //   Undo roll (about the x axis)
     int depth = x1;
-    int right = cos(camera_roll)*y1 + sin(camera_roll)*z1;
-    int up = -sin(camera_roll)*y1 + cos(camera_roll)*z1;
+    int right = cos(camera_roll) * y1 + sin(camera_roll) * z1;
+    int up = -sin(camera_roll) * y1 + cos(camera_roll) * z1;
 
     return contains(right, up);
   }

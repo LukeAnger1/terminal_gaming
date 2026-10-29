@@ -1,9 +1,9 @@
 #include <vector>
 
 #include "camera.cpp"
-#include "screen.cpp"
-#include "obj/triangle.cpp"
 #include "obj/object.cpp"
+#include "obj/triangle.cpp"
+#include "screen.cpp"
 
 // Square parameters
 //   TODO: Remove this later
@@ -11,13 +11,21 @@
 #define SQUARE_OFFSET 10
 
 static constexpr Point bottom_1{SQUARE_OFFSET, SQUARE_OFFSET, SQUARE_OFFSET};
-static constexpr Point bottom_2{SQUARE_OFFSET, SQUARE_OFFSET, SQUARE_OFFSET+SQUARE_WIDTH};
-static constexpr Point bottom_3{SQUARE_OFFSET, SQUARE_OFFSET+SQUARE_WIDTH, SQUARE_OFFSET};
-static constexpr Point bottom_4{SQUARE_OFFSET, SQUARE_OFFSET+SQUARE_WIDTH, SQUARE_OFFSET+SQUARE_WIDTH};
-static constexpr Point top_1{SQUARE_OFFSET+SQUARE_WIDTH, SQUARE_OFFSET, SQUARE_OFFSET};
-static constexpr Point top_2{SQUARE_OFFSET+SQUARE_WIDTH, SQUARE_OFFSET, SQUARE_OFFSET+SQUARE_WIDTH};
-static constexpr Point top_3{SQUARE_OFFSET+SQUARE_WIDTH, SQUARE_OFFSET+SQUARE_WIDTH, SQUARE_OFFSET};
-static constexpr Point top_4{SQUARE_OFFSET+SQUARE_WIDTH, SQUARE_OFFSET+SQUARE_WIDTH, SQUARE_OFFSET+SQUARE_WIDTH};
+static constexpr Point bottom_2{SQUARE_OFFSET, SQUARE_OFFSET,
+                                SQUARE_OFFSET + SQUARE_WIDTH};
+static constexpr Point bottom_3{SQUARE_OFFSET, SQUARE_OFFSET + SQUARE_WIDTH,
+                                SQUARE_OFFSET};
+static constexpr Point bottom_4{SQUARE_OFFSET, SQUARE_OFFSET + SQUARE_WIDTH,
+                                SQUARE_OFFSET + SQUARE_WIDTH};
+static constexpr Point top_1{SQUARE_OFFSET + SQUARE_WIDTH, SQUARE_OFFSET,
+                             SQUARE_OFFSET};
+static constexpr Point top_2{SQUARE_OFFSET + SQUARE_WIDTH, SQUARE_OFFSET,
+                             SQUARE_OFFSET + SQUARE_WIDTH};
+static constexpr Point top_3{SQUARE_OFFSET + SQUARE_WIDTH,
+                             SQUARE_OFFSET + SQUARE_WIDTH, SQUARE_OFFSET};
+static constexpr Point top_4{SQUARE_OFFSET + SQUARE_WIDTH,
+                             SQUARE_OFFSET + SQUARE_WIDTH,
+                             SQUARE_OFFSET + SQUARE_WIDTH};
 
 static constexpr Triangle triangle_top_1{top_1, top_2, top_3};
 static constexpr Triangle triangle_top_2{top_1, top_4, top_3};
@@ -30,11 +38,8 @@ class render_wrapper {
 public:
   render_wrapper() {
 
-    Object object{{
-      triangle_top_1, triangle_top_2,
-      triangle_front_1, triangle_front_2,
-      triangle_side_1, triangle_side_2
-    }};
+    Object object{{triangle_top_1, triangle_top_2, triangle_front_1,
+                   triangle_front_2, triangle_side_1, triangle_side_2}};
     objects.push_back(object);
   }
 
@@ -57,9 +62,10 @@ public:
     // Update the frame buffer
     screen.update_screen([&objs = objects, &camera = camera](int x, int y) {
       // Iterate through the triangles
-      for (const Object& obj : objs) {
+      for (const Object &obj : objs) {
         // Check if the point is in the triangle
-        if (obj.contains(camera.get_x(), camera.get_y(), camera.get_z(), camera.get_roll(), camera.get_pitch(), x, y)) {
+        if (obj.contains(camera.get_x(), camera.get_y(), camera.get_z(),
+                         camera.get_roll(), camera.get_pitch(), x, y)) {
 
           // Short circuit to return 'h'
           return 'O';

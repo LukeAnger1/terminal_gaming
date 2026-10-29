@@ -1,6 +1,6 @@
 #include <array>
-#include <iostream>
 #include <functional>
+#include <iostream>
 
 #include "../utils/program_control.cpp"
 
@@ -42,8 +42,9 @@ public:
 
   // This function updates the screen,
   //   Make sure to call it before print screen so the update is visible
-  //   It takes in a function and updates the screen to have each x, y based on the function inputted
-  void update_screen(const std::function<char(int, int)>& render_function) {
+  //   It takes in a function and updates the screen to have each x, y based on
+  //   the function inputted
+  void update_screen(const std::function<char(int, int)> &render_function) {
     for (int y = 0; y < SCREEN_HEIGHT; y++) {
       for (int x = 0; x < SCREEN_WIDTH; x++) {
         set_char(x, y, render_function(x, y));
